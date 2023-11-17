@@ -1,0 +1,77 @@
+@media (min-width: 300px) and (max-width: 600px) {
+  body {
+    padding: 0;
+  }
+
+  /* --------------- Logo -------------- */
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  /* ---------------Top Box ---------------*/
+
+  .container {
+    width: 100%;
+    /* box-shadow: none; */
+  }
+
+  .institute-name {
+    height: 70px;
+  }
+
+  .institute-name h1 {
+    font-size: 13px;
+  }
+
+  .institute-name h3 {
+    font-size: 10px;
+  }
+
+  .top-down {
+    margin-top: 5px;
+    width: 90%;
+  }
+
+  .voucher-box h4,
+  .head-box h4,
+  .t-right h4 {
+    font-size: 15px;
+  }
+
+  #voucher,
+  #head,
+  #date {
+    font-size: 12px;
+  }
+
+  /* --------------- Center2 Box ---------------*/
+
+  .center2-left h5 {
+    font-size: 15px;
+  }
+
+  /* ---------------Bottom Box ---------------*/
+  .payment-method h5 {
+    font-size: 15px;
+    line-height: 2;
+  }
+
+  .payment-method h5 .cheque-date {
+    border: 0;
+    width: 30%;
+  }
+
+  /* --------------- Total Box ---------------*/
+  #other-charge {
+    width: 30%;
+  }
+
+  .rsOptions input {
+    width: 65%;
+  }
+
+  .paise input {
+    width: 45%;
+  }
+}
