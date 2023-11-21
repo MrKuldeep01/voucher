@@ -71,9 +71,7 @@ router.post("/", async function (req, res) {
       paymentType,
     } = req.body;
 
-    let particularName = [];
-    particularName.push(req.body.particular);
-
+    let particularName = req.body.particular;
     let particularRupee = req.body.rupee;
 
     if (
@@ -90,19 +88,20 @@ router.post("/", async function (req, res) {
       });
     }
 
-    // const particularData = [];
+    // this is about particular data conditions
+    const particularData = [];
+    const particularObject = {};
 
-    // for (let i = 0; i < particularName.length; i++) {
-    //   const combinedObject = {
-    //     [particularName[i]]: particularRupee[i],
-    //   };
-    //   particularData.push(combinedObject);
-    // }
+    if (!Array.isArray(particularName) && !Array.isArray(particularRupee)) {
+      particularObject[particularName] = particularRupee;
+    } else {
+      for (let i = 0; i < particularName.length; i++) {
+        particularObject[particularName[i]] = particularRupee[i];
+      }
+    }
+    particularData.push(particularObject);
 
-    const particularData = particularName.map((item, index) => ({
-      [item]: particularRupee[index] || null,
-    }));
-
+    // this is about voucher number
     const latestUserData = await User.findOne().sort({ voucher: -1 });
 
     if (latestUserData && voucher == latestUserData.voucher) {
@@ -111,6 +110,7 @@ router.post("/", async function (req, res) {
       });
     }
 
+    // here we add our voucher data to backend
     const userData = new User({
       voucher,
       head,
@@ -135,41 +135,68 @@ router.post("/", async function (req, res) {
   }
 });
 
+// Remove voucher
 router.post("/remove", async (req, res) => {
   try {
     const { voucher, head } = req.body;
-
     const deletedVoucher = await User.findOneAndDelete({ voucher, head });
 
     if (deletedVoucher) {
       // Successfully deleted the voucher
-      res.status(400).render("store", {
-        success: true,
-        emptyMessage: "Voucher deleted successfully",
-      });
-      return res.json({
-        success: true,
-        message: "Voucher deleted successfully",
-      });
+      res
+        .status(200)
+        .json({ success: true, message: "Voucher deleted successfully" });
     } else {
       // Voucher not found
-      return res
-        .status(404)
-        .json({ success: false, message: "Voucher not found" });
+      res.status(404).json({ success: false, message: "Voucher not found" });
     }
   } catch (error) {
     console.error("Error deleting voucher:", error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal Server Error" });
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
 
-// router.get("/search/result", (req, res) => {
-//   const successMessage = req.flash("success");
-//   const errorMessage = req.flash("error");
-//   // Render your result page and pass flash messages
-//   res.render("searchResult", { successMessage, errorMessage });
-// });
+// Edit voucher
+router.post("/editvoucher", async (req, res) => {
+  const editedVoucherData = req.body.editedVoucherData;
+
+  try {
+    for (const item of editedVoucherData) {
+      const voucher = item.voucherNumber; // VoucherNumber is the existing voucher number
+      const head = item.voucherHead;
+      const voucherDate = item.voucherDate;
+      const particularData = item.particularData;
+      const totalAmount = item.totalAmount;
+      const chequeDate = item.chequeDate;
+      const chequeNo = item.chequeNo;
+      const paymentType = item.paymentType;
+
+      const editedVoucher = await User.findOneAndUpdate(
+        { voucher }, // Search for the document based on the voucher number
+        {
+          $set: {
+            head,
+            voucherDate,
+            particularData,
+            totalAmount,
+            chequeDate,
+            chequeNo,
+            paymentType,
+          },
+        },
+        { new: true }
+      );
+
+      console.log(editedVoucher);
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: "Voucher Updated Successfully" });
+  } catch (error) {
+    console.error("Error finding data:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
 
 module.exports = router;

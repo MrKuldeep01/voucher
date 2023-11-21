@@ -7,12 +7,64 @@ body {
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding: 5% 0;
   font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: rebeccapurple;
 }
 
+/* navbar css */
+
+header {
+  background-color: #000000b0;
+  padding: 10px px 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5%;
+  box-shadow: 0px 0px 6px 2px black;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+}
+
+.navLogo {
+  width: 50%;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLogo img {
+  width: 40px; /* Adjust the size of your logo */
+  height: auto;
+  margin-right: 10px;
+}
+
+.logo-text {
+  color: #fff;
+  font-size: 1.2em;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+/* Add a hover effect to the links */
+.nav-links a:hover {
+  border-bottom: 2px solid #fff; /* Adds an underline on hover */
+}
+
+/* ------------------------ */
 /* ---------------- Form --------------- */
 #form {
   display: flex;
@@ -23,7 +75,7 @@ body {
 }
 
 .error-message {
-  color: red;
+  color: black;
   font-weight: bold;
   font-size: 15px;
 }
@@ -109,6 +161,18 @@ body {
   text-align: center;
   align-items: center;
   font-size: 15px;
+}
+
+.voucherNo-alert {
+  background-color: #bdbdbd40;
+  padding: 5px 10px;
+  color: #ff0000;
+  font-size: 0.6rem;
+  margin-left: 10px;
+  border-radius: 3px;
+  font-weight: bold;
+  font-family: sans-serif;
+  transition: all 1s;
 }
 
 #voucher {
@@ -233,7 +297,7 @@ body {
   width: 80%;
   border-radius: 1px;
   outline: none;
-  border: 1px solid #29292961;
+  border: 1px solid #a7a7a752;
   padding: 5px;
   text-align: center;
 }
@@ -341,7 +405,7 @@ body {
   font-weight: bold;
   padding: 10px 20px;
   border: none;
-  border-bottom: 0.2px solid #29292961;
+  border-bottom: 0.2px solid #80808061;
   width: 75%;
 }
 
@@ -485,21 +549,11 @@ body {
 /* -------------------- preview page --------------------- */
 
 .preview-page {
-  position: absolute;
-  top: 10%;
-  right: 5%;
-}
-
-.preview-page > a {
-  color: white;
-  background-color: #353586df;
+  background-color: #000000c9;
   border-radius: 3px;
-  padding: 10px 20px;
-  font-size: 15px;
+  padding: 5px 15px;
+  font-size: 13px;
   text-decoration: none;
   font-family: sans-serif;
-}
-
-.preview-page > a:hover {
-  background-color: #1a1a5cdf;
+  color: #a49696;
 }
